@@ -6,7 +6,7 @@ target/
 .mvn
 mvnw.cmd
 mvnw
-
+logs/
 ### STS ###
 .apt_generated
 .classpath
@@ -21,3 +21,4 @@ mvnw
 *.iws
 *.iml
 *.ipr
+*.jpb
