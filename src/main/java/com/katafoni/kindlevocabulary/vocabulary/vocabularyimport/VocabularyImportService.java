@@ -2,8 +2,8 @@ package com.katafoni.kindlevocabulary.vocabulary.vocabularyimport;
 
 import com.katafoni.kindlevocabulary.dto.extern.PhraseDto;
 
-import java.util.List;
+import java.util.Set;
 
 public interface VocabularyImportService {
-    List<PhraseDto> createVocabularyList(ImportRequest importRequest);
+    Set<PhraseDto> createVocabularySet(ImportRequest importRequest);
 }

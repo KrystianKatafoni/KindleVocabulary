@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 public class Language {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="language_id")
     private long id;
     
