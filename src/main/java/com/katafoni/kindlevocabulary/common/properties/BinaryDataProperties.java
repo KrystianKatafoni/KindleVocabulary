@@ -1,6 +1,6 @@
 package com.katafoni.kindlevocabulary.common.properties;
 
-import com.katafoni.kindlevocabulary.binarydata.BinaryDataProviderName;
+import com.katafoni.kindlevocabulary.core.binarydata.BinaryDataProviderName;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

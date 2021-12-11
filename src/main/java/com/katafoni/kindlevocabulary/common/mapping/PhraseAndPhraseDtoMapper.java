@@ -1,9 +1,9 @@
 package com.katafoni.kindlevocabulary.common.mapping;
 
-import com.katafoni.kindlevocabulary.dto.PhraseDto;
-import com.katafoni.kindlevocabulary.entity.Language;
-import com.katafoni.kindlevocabulary.entity.Phrase;
-import com.katafoni.kindlevocabulary.language.LanguageService;
+import com.katafoni.kindlevocabulary.domain.dto.PhraseDto;
+import com.katafoni.kindlevocabulary.domain.entity.Language;
+import com.katafoni.kindlevocabulary.domain.entity.Phrase;
+import com.katafoni.kindlevocabulary.core.language.LanguageService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -24,7 +24,8 @@ public abstract class PhraseAndPhraseDtoMapper {
             @Mapping(target = "updatedAt", source = "phrase.updatedAt"),
             @Mapping(target = "sourceText", source = "phrase.sourceText"),
             @Mapping(target = "translatedText", source = "phrase.translatedText"),
-            @Mapping(target = "language", source = "phrase.language.languageName"),
+            @Mapping(target = "sourceLanguage", source = "phrase.sourceLanguage.languageName"),
+            @Mapping(target = "translatedLanguage", source = "phrase.translatedLanguage.languageName")
     })
     public abstract PhraseDto phraseToPhraseDto(Phrase phrase);
 
