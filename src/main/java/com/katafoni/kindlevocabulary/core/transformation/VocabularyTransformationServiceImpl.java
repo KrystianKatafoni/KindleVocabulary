@@ -79,7 +79,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
         if (StringUtils.isNotBlank(transformationRequest.getTranslationLanguage())) {
 
             Optional<Language> language =
-                    languageService.getLanguageByName(transformationRequest.getFilteringLanguage());
+                    languageService.getLanguageByName(transformationRequest.getTranslationLanguage());
 
             if (language.isPresent()) {
                 phrases = translationService.translatePhrases(phrases, language.get());

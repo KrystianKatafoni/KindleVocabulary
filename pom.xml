@@ -16,6 +16,18 @@
     <properties>
         <java.version>11</java.version>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>24.1.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -91,6 +103,11 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
         </dependency>
+
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>google-cloud-translate</artifactId>
+            </dependency>
 
     </dependencies>
 
