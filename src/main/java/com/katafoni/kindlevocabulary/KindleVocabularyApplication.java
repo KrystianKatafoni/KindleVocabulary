@@ -1,6 +1,6 @@
 package com.katafoni.kindlevocabulary;
 
-import com.katafoni.kindlevocabulary.properties.BinaryDataProperties;
+import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

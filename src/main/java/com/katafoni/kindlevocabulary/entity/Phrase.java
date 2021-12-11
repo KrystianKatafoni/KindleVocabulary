@@ -1,5 +1,8 @@
 package com.katafoni.kindlevocabulary.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -7,6 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Phrase {
     @Id
@@ -27,8 +33,5 @@ public class Phrase {
     @ManyToOne()
     @JoinColumn(name = "language_id")
     private Language language;
-
-    private LocalDateTime createdInKindle;
-
 
 }

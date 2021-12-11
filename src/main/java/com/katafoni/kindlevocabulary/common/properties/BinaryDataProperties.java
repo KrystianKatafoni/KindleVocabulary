@@ -1,4 +1,4 @@
-package com.katafoni.kindlevocabulary.properties;
+package com.katafoni.kindlevocabulary.common.properties;
 
 import com.katafoni.kindlevocabulary.binarydata.BinaryDataProviderName;
 import lombok.Getter;
@@ -12,4 +12,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class BinaryDataProperties {
     private BinaryDataProviderName defaultStorage;
     private String localStoragePath;
+    private String temporaryDatabaseFilename;
+    private String temporaryDatabaseFileExtension;
 }

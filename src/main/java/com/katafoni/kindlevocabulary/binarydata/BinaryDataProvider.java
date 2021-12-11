@@ -1,13 +1,12 @@
 package com.katafoni.kindlevocabulary.binarydata;
 
-import java.io.File;
 import java.io.InputStream;
 
 interface BinaryDataProvider {
 
-    void saveFile(File file);
+    String saveFile(InputStream inputStream);
 
-    void saveFile(InputStream inputStream);
+    void deleteFile(String fileName);
 
     BinaryDataProviderName getBinaryDataProviderName();
 }

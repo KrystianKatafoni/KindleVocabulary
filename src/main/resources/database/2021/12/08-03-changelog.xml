@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet author="Krystian" id="1639000145679-1">
+        <loadData encoding="UTF-8"
+                  file="static/language-codes.csv"
+                  separator=","
+                  tableName="language">
+            <column header="alpha2" name="abbreviation" type="STRING"/>
+            <column header="English" name="language_name" type="STRING"/>
+            <column header="alpha3-b" type="skip"/>
+            <column header="alpha3-t" type="skip"/>
+            <column header="French" type="skip"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

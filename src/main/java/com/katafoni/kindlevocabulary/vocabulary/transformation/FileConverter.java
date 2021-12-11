@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
 
-public interface TransformationService {
+interface FileConverter {
 
-    Set<Phrase> transformFileToPhrases(MultipartFile multipartFile);
+    Set<Phrase> convertFileToPhrases(MultipartFile multipartFile);
 }

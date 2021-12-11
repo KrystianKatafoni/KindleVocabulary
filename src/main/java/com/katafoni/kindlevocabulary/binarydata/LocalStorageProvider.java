@@ -2,7 +2,7 @@ package com.katafoni.kindlevocabulary.binarydata;
 
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.InternalFailureException;
-import com.katafoni.kindlevocabulary.properties.BinaryDataProperties;
+import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
 import com.katafoni.kindlevocabulary.util.LoggingUtil;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.apache.commons.io.FileUtils;
@@ -16,8 +16,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 
-import static com.katafoni.kindlevocabulary.binarydata.BinaryDataErrorCodes.DIRECTORY_PATH_FAILURE;
+import static com.katafoni.kindlevocabulary.binarydata.BinaryDataErrorCodes.*;
+import static com.katafoni.kindlevocabulary.common.DateTime.FILE_DATETIME_FORMATTER;
 
 @Component
 class LocalStorageProvider implements BinaryDataProvider {
@@ -33,19 +35,38 @@ class LocalStorageProvider implements BinaryDataProvider {
         this.messageSource = messageSource;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void saveFile(File file) {
-    }
-
-    @Override
-    public void saveFile(InputStream inputStream) {
+    public String saveFile(InputStream inputStream) {
         validateInternalPathConfiguration();
+        String fileName =
+                binaryDataProperties.getTemporaryDatabaseFilename()
+                        + LocalDateTime.now().format(FILE_DATETIME_FORMATTER)
+                        + binaryDataProperties.getTemporaryDatabaseFileExtension();
 
-        File targetFile = new File(binaryDataProperties.getLocalStoragePath() + "/tmp.db");
+        File targetFile = new File(binaryDataProperties.getLocalStoragePath() + fileName);
+
         try {
             FileUtils.copyInputStreamToFile(inputStream, targetFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            String message = messageSource.getMessage(SAVING_FILE_FAILURE.getMessageCode(), e.getMessage());
+            logger.error(LoggingUtil.getLoggingMessage(SAVING_FILE_FAILURE.getErrorCode(), message));
+            throw new InternalFailureException(SAVING_FILE_FAILURE.getErrorCode(),
+                    messageSource.getMessage(ExceptionMessageCodes.INTERNAL_FAILURE_EXCEPTION));
+        }
+        return fileName;
+    }
+
+    @Override
+    public void deleteFile(String fileName) {
+        Path path = Paths.get(binaryDataProperties.getLocalStoragePath() + fileName);
+        try {
+            Files.delete(path);
+        } catch (IOException e) {
+            String message = messageSource.getMessage(DELETING_FILE_FAILURE.getMessageCode(), e.getMessage());
+            logger.error(LoggingUtil.getLoggingMessage(DELETING_FILE_FAILURE.getErrorCode(), message));
         }
     }
 
@@ -55,11 +76,11 @@ class LocalStorageProvider implements BinaryDataProvider {
             String message = messageSource.getMessage(DIRECTORY_PATH_FAILURE.getMessageCode(),
                     binaryDataProperties.getLocalStoragePath());
             logger.error(LoggingUtil.getLoggingMessage(DIRECTORY_PATH_FAILURE.getErrorCode(), message));
-
             throw new InternalFailureException(DIRECTORY_PATH_FAILURE.getErrorCode(),
                     messageSource.getMessage(ExceptionMessageCodes.INTERNAL_FAILURE_EXCEPTION));
         }
     }
+
     @Override
     public BinaryDataProviderName getBinaryDataProviderName() {
         return BinaryDataProviderName.LOCAL_STORAGE;

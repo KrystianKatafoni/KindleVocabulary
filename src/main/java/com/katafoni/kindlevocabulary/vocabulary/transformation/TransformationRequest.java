@@ -1,4 +1,4 @@
-package com.katafoni.kindlevocabulary.vocabulary.vocabularyimport;
+package com.katafoni.kindlevocabulary.vocabulary.transformation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImportRequest {
+public class TransformationRequest {
 
     private MultipartFile multipartFile;
-
-    private Boolean removeDuplicates;
 
     private String translationLanguage;
 
