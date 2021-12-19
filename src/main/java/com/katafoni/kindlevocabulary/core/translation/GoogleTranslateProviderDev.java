@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Profile("test")
+@Profile("dev")
 @Component
-public class GoogleTranslateProviderTest implements TranslationProvider {
+public class GoogleTranslateProviderDev implements TranslationProvider {
 
     @Override
     public Set<Phrase> translate(Set<Phrase> phrases, Language sourceLanguage, Language translationLanguage) {
