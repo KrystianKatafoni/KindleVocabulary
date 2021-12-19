@@ -2,7 +2,7 @@ package com.katafoni.kindlevocabulary.core.transformation;
 
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.InternalFailureException;
-import com.katafoni.kindlevocabulary.util.LoggingUtil;
+import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ class SqliteReader implements DatabaseReader {
         } catch (SQLException e) {
             String message = messageSourceFacade.getMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getMessageCode(), databasePath,
                     e.getMessage());
-            logger.error(LoggingUtil.getLoggingMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getErrorCode(), message));
+            logger.error(LoggingUtils.getLoggingMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getErrorCode(), message));
             throw new InternalFailureException(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getErrorCode(),
                     messageSourceFacade.getMessage(ExceptionMessageCodes.INTERNAL_FAILURE_EXCEPTION));
         } finally {
@@ -55,7 +55,7 @@ class SqliteReader implements DatabaseReader {
             } catch (SQLException e) {
                 String message = messageSourceFacade.getMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getMessageCode(),
                         databasePath, e.getMessage());
-                logger.error(LoggingUtil.getLoggingMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getErrorCode(), message));
+                logger.error(LoggingUtils.getLoggingMessage(TranformationErrorCodes.KINDLE_DATABASE_FAILURE.getErrorCode(), message));
             }
         }
         return kindleWords;

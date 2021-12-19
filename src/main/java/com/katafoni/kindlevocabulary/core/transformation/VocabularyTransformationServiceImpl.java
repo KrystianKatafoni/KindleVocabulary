@@ -8,9 +8,9 @@ import com.katafoni.kindlevocabulary.core.translation.TranslationService;
 import com.katafoni.kindlevocabulary.domain.dto.PhraseDto;
 import com.katafoni.kindlevocabulary.domain.entity.Language;
 import com.katafoni.kindlevocabulary.domain.entity.Phrase;
-import com.katafoni.kindlevocabulary.util.LoggingUtil;
+import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
-import com.katafoni.kindlevocabulary.util.PhraseUtil;
+import com.katafoni.kindlevocabulary.util.PhraseUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +60,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
         if (filteringLanguage.isPresent()) {
             int initialPhrasesCount = phrases.size();
 
-            phrases = PhraseUtil.filterByLanguage(phrases, filteringLanguage.get());
+            phrases = PhraseUtils.filterByLanguage(phrases, filteringLanguage.get());
 
             int filteredPhrases = initialPhrasesCount - phrases.size();
 
@@ -69,7 +69,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
         } else {
             String message = messageSourceFacade.getMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getMessageCode(),
                     transformationRequest.getFilteringLanguage());
-            logger.warn(LoggingUtil.getLoggingMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(), message));
+            logger.warn(LoggingUtils.getLoggingMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(), message));
             throw new RequestParameterException(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(),
                     messageSourceFacade.getMessage(ExceptionMessageCodes.REQUEST_PARAMETER_EXCEPTION,
                             "filter_lang", transformationRequest.getFilteringLanguage()));
@@ -85,7 +85,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
             } else {
                 String message = messageSourceFacade.getMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getMessageCode(),
                         transformationRequest.getTranslationLanguage());
-                logger.warn(LoggingUtil.getLoggingMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(), message));
+                logger.warn(LoggingUtils.getLoggingMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(), message));
                 throw new RequestParameterException(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getErrorCode(),
                         messageSourceFacade.getMessage(ExceptionMessageCodes.REQUEST_PARAMETER_EXCEPTION,
                                 "trans_lang", transformationRequest.getTranslationLanguage()));

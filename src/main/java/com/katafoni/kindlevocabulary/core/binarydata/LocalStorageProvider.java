@@ -3,7 +3,7 @@ package com.katafoni.kindlevocabulary.core.binarydata;
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.InternalFailureException;
 import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
-import com.katafoni.kindlevocabulary.util.LoggingUtil;
+import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -52,7 +52,7 @@ class LocalStorageProvider implements BinaryDataProvider {
             FileUtils.copyInputStreamToFile(inputStream, targetFile);
         } catch (IOException e) {
             String message = messageSource.getMessage(SAVING_FILE_FAILURE.getMessageCode(), e.getMessage());
-            logger.error(LoggingUtil.getLoggingMessage(SAVING_FILE_FAILURE.getErrorCode(), message));
+            logger.error(LoggingUtils.getLoggingMessage(SAVING_FILE_FAILURE.getErrorCode(), message));
             throw new InternalFailureException(SAVING_FILE_FAILURE.getErrorCode(),
                     messageSource.getMessage(ExceptionMessageCodes.INTERNAL_FAILURE_EXCEPTION));
         }
@@ -66,7 +66,7 @@ class LocalStorageProvider implements BinaryDataProvider {
             Files.delete(path);
         } catch (IOException e) {
             String message = messageSource.getMessage(DELETING_FILE_FAILURE.getMessageCode(), e.getMessage());
-            logger.error(LoggingUtil.getLoggingMessage(DELETING_FILE_FAILURE.getErrorCode(), message));
+            logger.error(LoggingUtils.getLoggingMessage(DELETING_FILE_FAILURE.getErrorCode(), message));
         }
     }
 
@@ -75,7 +75,7 @@ class LocalStorageProvider implements BinaryDataProvider {
         if (!Files.isDirectory(path)) {
             String message = messageSource.getMessage(DIRECTORY_PATH_FAILURE.getMessageCode(),
                     binaryDataProperties.getLocalStoragePath());
-            logger.error(LoggingUtil.getLoggingMessage(DIRECTORY_PATH_FAILURE.getErrorCode(), message));
+            logger.error(LoggingUtils.getLoggingMessage(DIRECTORY_PATH_FAILURE.getErrorCode(), message));
             throw new InternalFailureException(DIRECTORY_PATH_FAILURE.getErrorCode(),
                     messageSource.getMessage(ExceptionMessageCodes.INTERNAL_FAILURE_EXCEPTION));
         }

@@ -3,7 +3,7 @@ package com.katafoni.kindlevocabulary.core.binarydata;
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.FileUploadException;
 import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
-import com.katafoni.kindlevocabulary.util.LoggingUtil;
+import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class BinaryDataServiceImpl implements BinaryDataService {
             fileName = binaryDataProvider.saveFile(multipartFile.getInputStream());
         } catch (IOException e) {
             String message = messageSource.getMessage(BinaryDataErrorCodes.MULTIPART_FILE_FAILURE.getMessageCode(), e.getMessage());
-            logger.error(LoggingUtil.getLoggingMessage(BinaryDataErrorCodes.MULTIPART_FILE_FAILURE.getErrorCode(), message));
+            logger.error(LoggingUtils.getLoggingMessage(BinaryDataErrorCodes.MULTIPART_FILE_FAILURE.getErrorCode(), message));
             throw new FileUploadException(BinaryDataErrorCodes.MULTIPART_FILE_FAILURE.getErrorCode(),
                     messageSource.getMessage(ExceptionMessageCodes.FILE_UPLOAD_EXCEPTION));
         }

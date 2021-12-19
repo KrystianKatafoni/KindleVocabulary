@@ -15,6 +15,11 @@ import java.util.Objects;
 @Entity
 public class Language {
 
+    public Language(String languageName, String abbreviation) {
+        this.languageName = languageName;
+        this.abbreviation = abbreviation;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "language_id")
