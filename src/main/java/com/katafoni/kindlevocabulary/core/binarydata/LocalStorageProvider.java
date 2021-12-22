@@ -3,6 +3,7 @@ package com.katafoni.kindlevocabulary.core.binarydata;
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.InternalFailureException;
 import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
+import com.katafoni.kindlevocabulary.util.ArgumentUtils;
 import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.apache.commons.io.FileUtils;
@@ -40,6 +41,8 @@ class LocalStorageProvider implements BinaryDataProvider {
      */
     @Override
     public String saveFile(InputStream inputStream) {
+        ArgumentUtils.checkNotNull(inputStream, "inputStream");
+
         validateInternalPathConfiguration();
         String fileName =
                 binaryDataProperties.getTemporaryDatabaseFilename()

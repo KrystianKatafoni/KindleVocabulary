@@ -3,6 +3,7 @@ package com.katafoni.kindlevocabulary.core.binarydata;
 import com.katafoni.kindlevocabulary.common.exception.ExceptionMessageCodes;
 import com.katafoni.kindlevocabulary.common.exception.FileUploadException;
 import com.katafoni.kindlevocabulary.common.properties.BinaryDataProperties;
+import com.katafoni.kindlevocabulary.util.ArgumentUtils;
 import com.katafoni.kindlevocabulary.util.LoggingUtils;
 import com.katafoni.kindlevocabulary.util.MessageSourceFacade;
 import org.slf4j.Logger;
@@ -33,6 +34,8 @@ public class BinaryDataServiceImpl implements BinaryDataService {
 
     @Override
     public String saveFileAsDatabaseStorage(MultipartFile multipartFile) {
+        ArgumentUtils.checkNotNull(multipartFile, "multipartFile");
+
         BinaryDataProvider binaryDataProvider =
                 binaryDataProviderFactory.findBinaryDataProvider(BinaryDataProviderName.LOCAL_STORAGE);
         String fileName;
@@ -49,6 +52,8 @@ public class BinaryDataServiceImpl implements BinaryDataService {
 
     @Override
     public void deleteFileSavedAsDatabaseStorage(String fileName) {
+        ArgumentUtils.checkNotNull(fileName, "fileName");
+
         BinaryDataProvider binaryDataProvider =
                 binaryDataProviderFactory.findBinaryDataProvider(BinaryDataProviderName.LOCAL_STORAGE);
         binaryDataProvider.deleteFile(fileName);

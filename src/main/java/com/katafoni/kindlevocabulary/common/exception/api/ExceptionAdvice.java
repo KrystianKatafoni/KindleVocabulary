@@ -26,6 +26,11 @@ public class ExceptionAdvice {
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, ex.getErrorCode(), ex.getMessage()));
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> illegalArgumentExceptionHandler(IllegalArgumentException ex) {
+        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }

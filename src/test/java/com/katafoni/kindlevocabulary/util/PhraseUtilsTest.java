@@ -17,7 +17,7 @@ class PhraseUtilsTest {
     private Set<Phrase> testPhrases = PhraseCreator.createPhrasesWithAdditionalSourceLanguage(11, germanSourceLanguage);
 
     @Test
-    void when_filterByLanguage_english_then_five_phrases_in_result() {
+    void whenFilterByLanguageEnglish_thenFivePhrasesInResult() {
 
         //when
         Set<Phrase> resultPhrasesEnglish = PhraseUtils.filterByLanguage(this.testPhrases, PhraseCreator.SOURCE_LANGUAGE);
@@ -28,7 +28,7 @@ class PhraseUtilsTest {
     }
 
     @Test
-    void when_filterByLanguage_german_then_six_phrases_in_result() {
+    void whenFilterByLanguageGerman_thenSixPhrasesInResult() {
 
         //when
         Set<Phrase> resultPhrasesGerman = PhraseUtils.filterByLanguage(this.testPhrases, this.germanSourceLanguage);
@@ -39,7 +39,7 @@ class PhraseUtilsTest {
     }
 
     @Test
-    void when_filterByLanguage_russian_then_zero_phrases_in_result() {
+    void whenFilterByLanguageRussian_thenZeroPhrasesInResult() {
 
         //given
         Language russianSourceLanguage = new Language("russian", "ru");
@@ -52,7 +52,7 @@ class PhraseUtilsTest {
     }
 
     @Test
-    void when_filterByLanguage_empty_phrases_then_return_empty_phrases() {
+    void whenFilterByLanguageEmptyPhrases_thenReturnEmptyPhrases() {
 
         //when
         Set<Phrase> resultPhrases = PhraseUtils.filterByLanguage(Sets.newHashSet(), PhraseCreator.SOURCE_LANGUAGE);
@@ -62,7 +62,7 @@ class PhraseUtilsTest {
     }
 
     @Test
-    void when_filterByLanguage_phrases_null_then_throw_exception() {
+    void whenFilterByLanguagePhrasesNull_thenThrowException() {
 
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> PhraseUtils.filterByLanguage(null, this.germanSourceLanguage));
@@ -72,7 +72,7 @@ class PhraseUtilsTest {
     }
 
     @Test
-    void when_filterByLanguage_language_null_then_throw_exception() {
+    void whenFilterByLanguageLanguageNull_thenThrowException() {
 
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> PhraseUtils.filterByLanguage(testPhrases, null));
@@ -80,5 +80,4 @@ class PhraseUtilsTest {
         //then
         assertEquals("Argument language cannot be null", exception.getMessage());
     }
-
 }
