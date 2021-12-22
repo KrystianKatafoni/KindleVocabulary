@@ -25,9 +25,9 @@ public class VocabularyTransformationController {
     }
 
     @GetMapping
-    public Set<PhraseDto> getVocabularySet(@RequestParam("file") @NotNull MultipartFile file,
-                                           @RequestParam(value = "trans_lang", required = false) String translationLanguage,
-                                           @RequestParam(value = "filter_lang") @NotNull String filteringLanguage) {
+    public Set<PhraseDto> getVocabularyFromFile(@RequestParam("file") @NotNull MultipartFile file,
+                                                @RequestParam(value = "trans_lang", required = false) String translationLanguage,
+                                                @RequestParam(value = "filter_lang") @NotNull String filteringLanguage) {
         logger.info("New transformation request for vocabulary set, filename: {}, translation language: {}, " +
                         "filtering language: {}", file.getOriginalFilename(), translationLanguage, filteringLanguage);
 

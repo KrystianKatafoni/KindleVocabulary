@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PhraseUtilsTest {
 
     private Language germanSourceLanguage = new Language("german", "de");
-    private Set<Phrase> testPhrases = PhraseCreator.createPhraseSetWithAdditionalSourceLang(11, germanSourceLanguage);
+    private Set<Phrase> testPhrases = PhraseCreator.createPhrasesWithAdditionalSourceLanguage(11, germanSourceLanguage);
 
     @Test
     void when_filterByLanguage_english_then_five_phrases_in_result() {
