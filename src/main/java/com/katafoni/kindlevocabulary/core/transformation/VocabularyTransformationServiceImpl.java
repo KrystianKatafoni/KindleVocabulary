@@ -52,7 +52,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
     public Set<PhraseDto> transformVocabulary(TransformationRequest transformationRequest) {
 
         Set<Phrase> phrases = this.fileConverter.convertFileToPhrases(transformationRequest.getMultipartFile());
-        removePhrasesWithoutLanguage(phrases);
+        phrases = removePhrasesWithoutLanguage(phrases);
 
         Optional<Language> filteringLanguage =
                 languageService.getLanguageByName(transformationRequest.getFilteringLanguage());
@@ -64,7 +64,7 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
 
             int filteredPhrases = initialPhrasesCount - phrases.size();
 
-            logger.info("There was {} filtered phrases for language: {}", filteredPhrases,
+            logger.info("There was {} filtered phrases. Filtering language: {}", filteredPhrases,
                     filteringLanguage.get().getLanguageName());
         } else {
             String message = messageSourceFacade.getMessage(TranformationErrorCodes.LANGUAGE_NAME_INVALID.getMessageCode(),
@@ -96,14 +96,15 @@ class VocabularyTransformationServiceImpl implements VocabularyTransformationSer
         return this.phraseAndPhraseDtoMapper.phrasesToPhraseDtos(phrases);
     }
 
-    private void removePhrasesWithoutLanguage(Set<Phrase> phrases) {
+    private Set<Phrase> removePhrasesWithoutLanguage(Set<Phrase> phrases) {
 
         int initialPhrasesCount = phrases.size();
 
-        phrases = phrases.stream().filter(phrase -> Objects.isNull(phrase.getSourceLanguage())).collect(Collectors.toSet());
+        phrases = phrases.stream().filter(phrase -> Objects.nonNull(phrase.getSourceLanguage())).collect(Collectors.toSet());
 
         int afterRemovingPhrasesCount = phrases.size();
         int deletedPhrasesCount = initialPhrasesCount - afterRemovingPhrasesCount;
         logger.info("There was {} deleted phrases without language", deletedPhrasesCount);
+        return phrases;
     }
 }
