@@ -1,5 +1,6 @@
 package com.katafoni.kindlevocabulary.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +11,13 @@ public class ArgumentUtils {
         if (object == null) {
             logger.error(String.format("Argument %s cannot be null", argumentName));
             throw new IllegalArgumentException(String.format("Argument %s cannot be null", argumentName));
+        }
+    }
+
+    public static void checkNotEmpty(String text, String argumentName) {
+        if (StringUtils.isEmpty(text)) {
+            logger.error(String.format("Argument %s cannot be empty", argumentName));
+            throw new IllegalArgumentException(String.format("Argument %s cannot be empty", argumentName));
         }
     }
 }

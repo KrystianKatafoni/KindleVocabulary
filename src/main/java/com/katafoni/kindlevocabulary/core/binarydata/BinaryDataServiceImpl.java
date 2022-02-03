@@ -52,7 +52,7 @@ public class BinaryDataServiceImpl implements BinaryDataService {
 
     @Override
     public void deleteFileSavedAsDatabaseStorage(String fileName) {
-        ArgumentUtils.checkNotNull(fileName, "fileName");
+        ArgumentUtils.checkNotEmpty(fileName, "fileName");
 
         BinaryDataProvider binaryDataProvider =
                 binaryDataProviderFactory.findBinaryDataProvider(BinaryDataProviderName.LOCAL_STORAGE);
